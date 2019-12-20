@@ -34,6 +34,7 @@ class Extractor():
         x = image.img_to_array(img)
         x = np.expand_dims(x, axis=0)
         x = preprocess_input(x)
+        x = np.resize(x,(1,480, 854, 3))
 
         # Get the prediction.
         features = self.model.predict(x)

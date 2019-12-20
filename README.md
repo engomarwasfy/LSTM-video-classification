@@ -2,6 +2,7 @@
 
 Video classification example with Inception and LSTM. See detailed description in this blog post: https://www.apriorit.com/dev-blog/609-ai-long-short-term-memory-video-classification
 
+x = np.resize(x,(1,480, 854, 3))
 1. Place the videos from your dataset in data/train and data/test folders. Each video type should have its own folder
 
 >	| data/test

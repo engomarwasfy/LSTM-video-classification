@@ -12,6 +12,4 @@ def process_image(image, target_shape):
 
     # Turn it into numpy, normalize and return.
     img_arr = img_to_array(image)
-    x = (img_arr / 255.).astype(np.float32)
-
-    return x
+    return (img_arr / 255.).astype(np.float32)

@@ -66,13 +66,13 @@ class DataSet():
     def clean_data(self):
         """Limit samples to greater than the sequence length and fewer
         than N frames. Also limit it to classes we want to use."""
-        data_clean = []
-        for item in self.data:
-            if int(item[3]) >= self.seq_length and int(item[3]) <= self.max_frames \
-                    and item[1] in self.classes:
-                data_clean.append(item)
-
-        return data_clean
+        return [
+            item
+            for item in self.data
+            if int(item[3]) >= self.seq_length
+            and int(item[3]) <= self.max_frames
+            and item[1] in self.classes
+        ]
 
     def get_classes(self):
         """Extract the classes from our data. If we want to limit them,
@@ -239,8 +239,7 @@ class DataSet():
         filenames."""
         path = os.path.join('data', sample[0], sample[1])
         filename = sample[2]
-        images = sorted(glob.glob(os.path.join(path, filename + '*jpg')))
-        return images
+        return sorted(glob.glob(os.path.join(path, filename + '*jpg')))
 
     @staticmethod
     def get_filename_from_image(filename):
@@ -266,9 +265,9 @@ class DataSet():
     def print_class_from_prediction(self, predictions, nb_to_return=5):
         """Given a prediction, print the top classes."""
         # Get the prediction for each label.
-        label_predictions = {}
-        for i, label in enumerate(self.classes):
-            label_predictions[label] = predictions[i]
+        label_predictions = {
+            label: predictions[i] for i, label in enumerate(self.classes)
+        }
 
         # Now sort them.
         sorted_lps = sorted(
